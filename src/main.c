@@ -7,15 +7,15 @@ extern const vec3f vs[937];
 extern const uint16_t fs[4364];
 
 const vec3f cube_vs[] = {
-	{ .x =  0.3f, .y =  0.3f, .z = 0.3f },
-	{ .x = -0.3f, .y =  0.3f, .z = 0.3f },
-	{ .x = -0.3f, .y = -0.3f, .z = 0.3f },
-	{ .x =  0.3f, .y = -0.3f, .z = 0.3f },
+	{ .x =  1.0f, .y =  1.0f, .z = 1.0f },
+	{ .x = -1.0f, .y =  1.0f, .z = 1.0f },
+	{ .x = -1.0f, .y = -1.0f, .z = 1.0f },
+	{ .x =  1.0f, .y = -1.0f, .z = 1.0f },
 
-	{ .x =  0.3f, .y =  0.3f, .z = -0.3f },
-	{ .x = -0.3f, .y =  0.3f, .z = -0.3f },
-	{ .x = -0.3f, .y = -0.3f, .z = -0.3f },
-	{ .x =  0.3f, .y = -0.3f, .z = -0.3f },
+	{ .x =  1.0f, .y =  1.0f, .z = -1.0f },
+	{ .x = -1.0f, .y =  1.0f, .z = -1.0f },
+	{ .x = -1.0f, .y = -1.0f, .z = -1.0f },
+	{ .x =  1.0f, .y = -1.0f, .z = -1.0f },
 };
 
 // work around for lack of support for static arrays with different length
@@ -42,6 +42,14 @@ void drawCube(float dx, float dy, float dz, float angle, uint32_t color) {
 			a = cube_vs[cube_fs[j]];
 			b = cube_vs[cube_fs[j+1]];
 
+			a.x /= 5;
+			a.y /= 5;
+			a.z /= 5;
+
+			b.x /= 5;
+			b.y /= 5;
+			b.z /= 5;
+
 			a = rotate_xz(a, angle);
 			b = rotate_xz(b, angle);
 			a = rotate_xy(a, angle);
@@ -63,6 +71,14 @@ void drawCube(float dx, float dy, float dz, float angle, uint32_t color) {
 
 		a = cube_vs[cube_fs[i+1]];
 		b = cube_vs[cube_fs[j]];
+
+		a.x /= 5;
+		a.y /= 5;
+		a.z /= 5;
+
+		b.x /= 5;
+		b.y /= 5;
+		b.z /= 5;
 
 		a = rotate_xz(a, angle);
 		b = rotate_xz(b, angle);
@@ -86,16 +102,17 @@ float angle = -DEG2RAD(90);
 float dz = 4.0f;
 
 void update(const float dt) {
-	angle += 1.5f * PI * dt;
+	angle += 0.5f * PI * dt;
+	//dz -= dt;
 
 	for (uint32_t idx = 0; idx < FRAME_WIDTH*FRAME_HEIGHT; idx += 1) {
 		frame_buffer[0][idx] = RGBA(0, 0, 0, 0);
 	}
 
-	drawCube( 1.8f, -1.5f, 6.0f,                angle, RGB(255, 255,   0));
-	drawCube( 1.8f,  1.5f, 6.0f, -angle + DEG2RAD(45), RGB(255,   0,   0));
-	drawCube(-1.8f, -1.5f, 6.0f,               -angle, RGB(  0,   0, 255));
-	drawCube(-1.8f,  1.5f, 6.0f,  angle + DEG2RAD(45), RGB(  0, 255,   0));
+	//drawCube( 1.8f, -1.5f, 6.0f,                angle, RGB(255, 255,   0));
+	//drawCube( 1.8f,  1.5f, 6.0f, -angle + DEG2RAD(45), RGB(255,   0,   0));
+	//drawCube(-1.8f, -1.5f, 6.0f,               -angle, RGB(  0,   0, 255));
+	//drawCube(-1.8f,  1.5f, 6.0f,  angle + DEG2RAD(45), RGB(  0, 255,   0));
 
 	for (uint16_t i = 0; i < sizeof(fs)/sizeof(fs[0]); i += fs[i] + 1) {
 		vec3f a;
@@ -103,12 +120,12 @@ void update(const float dt) {
 
 		uint16_t j = i + 1;
 
-		uint32_t color = RGB(63, 127, 255);
+		uint32_t color = RGB(0, 190, 190);
 
-		if (i > 2454) {
+		if (i < 366) {
+			color = RGB(63, 127, 255);
+		} else if (i > 2454) {
 			color = RGB(190, 190, 190);
-		} else if (i > 350) {
-			color = RGB(255, 63, 127);
 		}
 
 		for (; j < i + fs[i]; j += 1) {

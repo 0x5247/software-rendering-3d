@@ -23,6 +23,7 @@ vec2f screenf(vec2f p) {
 }
 
 vec2f project(vec3f p) {
+	// ref: https://github.com/tsoding/formula/issues/4
 	const float focal = 2.5f;
 
 	return (vec2f){
