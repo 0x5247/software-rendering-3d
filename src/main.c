@@ -120,7 +120,7 @@ void update(const float dt) {
 
 		uint16_t j = i + 1;
 
-		uint32_t color = RGB(0, 190, 190);
+		uint32_t color = RGB(255, 63, 127);
 
 		if (i < 366) {
 			color = RGB(63, 127, 255);
@@ -160,4 +160,5 @@ void update(const float dt) {
 	frame_buffer[0][1] = 0xFF00FF00;
 	frame_buffer[0][2] = 0xFFFF0000;
 }
+
 
