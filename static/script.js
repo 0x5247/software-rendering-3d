@@ -85,10 +85,29 @@ const wasmBrowserInstantiate = async (wasmModuleUrl, importObject) => {
 	return response;
 };
 
+const log = (n, idx) => {
+	switch (idx) {
+	case 0:
+		log0.textContent = n;
+		break;
+	case 1:
+		log1.textContent = n;
+		break;
+	case 2:
+		log2.textContent = n;
+		break;
+	case 3:
+		log3.textContent = n;
+		break;
+	}
+};
+
 wasmBrowserInstantiate("/mod.wasm", {
 	env: {
 		abort: () => console.log("Abort!"),
 		sin: Math.sin,
 		cos: Math.cos,
+		print_i32: log,
+		print_f32: log,
 	},
 }).then(runWasm);

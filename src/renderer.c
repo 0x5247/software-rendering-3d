@@ -35,7 +35,7 @@ void drawLinef(vec2f p, vec2f p1, uint32_t col) {
 	float dx = p.x - p1.x;
 	float dy = p.y - p1.y;
 
-	uint32_t steps = MAX(ABS(dx), ABS(dy));
+	int32_t steps = MAX(ABS(dx), ABS(dy));
 
 	float x_inc = dx/steps;
 	float y_inc = dy/steps;
@@ -43,7 +43,7 @@ void drawLinef(vec2f p, vec2f p1, uint32_t col) {
 	p.x = p1.x;
 	p.y = p1.y;
 
-	for (uint32_t i = 0; i < steps; i += 1, p.x += x_inc, p.y += y_inc) {
+	for (int32_t i = 0; i < steps; i += 1, p.x += x_inc, p.y += y_inc) {
 		if (p.x < 0 || p.y < 0 || FRAME_WIDTH < p.x || FRAME_HEIGHT < p.y) continue;
 
 		frame_buffer[(uint32_t)p.y][(uint32_t)p.x] = col;
