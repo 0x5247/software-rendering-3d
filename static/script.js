@@ -36,10 +36,12 @@ const runWasm = (wasmModule) => {
 	let pt = 0.0;
 
 	const loop = (t) => {
-		const dt = t - pt;
+		const dt = (t - pt) * 0.001;
 		pt = t;
 
-		exports.update(dt * 0.001);
+		logjs.textContent = `FPS: ${Math.floor(1/dt)}`;
+
+		exports.update(dt);
 
 		ctx.putImageData(frame, 0, 0);
 		requestAnimationFrame(loop);

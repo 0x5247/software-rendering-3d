@@ -98,11 +98,15 @@ void drawCube(float dx, float dy, float dz, float angle, uint32_t color) {
 	}
 }
 
-float angle = -DEG2RAD(90);
+float angle = 0.0f;
 float dz = 5.0f;
 
+float o = 0.0f;
+
 void update(const float dt) {
-	angle += (2.0f * PI) * dt;
+	angle += (0.5f * PI) * dt;
+
+	o += (FS_LEN / 10.0f) * dt;
 
 	for (uint32_t idx = 0; idx < FRAME_WIDTH*FRAME_HEIGHT; idx += 1) {
 		frame_buffer[0][idx] = RGBA(0, 0, 0, 0);
@@ -110,7 +114,7 @@ void update(const float dt) {
 
 	//drawCube(0, 0, dz, angle, RGB(0, 255, 0));
 
-	for (uint16_t i = 0; i < sizeof(fs)/sizeof(fs[0]); i += fs[i] + 1) {
+	for (uint16_t i = 0, fs_idx = 0, len = MIN(FS_LEN, (uint16_t)o); i < sizeof(fs)/sizeof(fs[0]) && fs_idx < len; i += fs[i] + 1, fs_idx += 1) {
 		vec3f a;
 		vec3f b;
 
@@ -118,9 +122,9 @@ void update(const float dt) {
 
 		uint32_t color = RGB(255, 63, 127);
 
-		if (i < 373) {
+		if (fs_idx < 76) {
 			color = RGB(63, 127, 255);
-		} else if (i > 2459) {
+		} else if (fs_idx > 479) {
 			color = RGB(190, 190, 190);
 		}
 
@@ -150,6 +154,7 @@ void update(const float dt) {
 		b.z += dz;
 
 		drawLinef(screenf(project(a)), screenf(project(b)), color);
+		//print_u16(fs_idx, 0); // 869
 	}
 
 	frame_buffer[0][0] = 0xFF0000FF;

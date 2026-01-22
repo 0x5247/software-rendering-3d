@@ -128,9 +128,11 @@ func main() {
 
 	fmt.Println("// generated with obj2c.go\n")
 
+	fmt.Printf("#define FS_LEN %v\n\n", len(fs))
+
 	fmt.Printf("const vec3f vs[%v] = {\n", len(vs))
 	for _, v := range vs {
-		fmt.Printf("\t{%v,%v,%v,},\n", v[0], v[1], v[2])
+		fmt.Printf("\t{%v,%v,%v},\n", v[0], v[1], v[2])
 	}
 	fmt.Println("};\n")
 
@@ -144,5 +146,7 @@ func main() {
 
 		fmt.Println()
 	}
-	fmt.Println("\t0,\n};")
+	fmt.Println("\t0\n};")
+
+	fmt.Fprintf(os.Stderr, "vs.len: %v, fs.len: %v, fss.len: %v\n", len(vs), len(fs), fsLen)
 }
