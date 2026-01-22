@@ -34,5 +34,6 @@ typedef struct {
 	float z;
 } vec3f;
 
+extern void print_u16(uint16_t n, uint32_t p);
 extern void print_i32(int32_t n, uint32_t p);
 extern void print_f32(float n, uint32_t p);

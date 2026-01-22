@@ -102,7 +102,7 @@ float angle = -DEG2RAD(90);
 float dz = 5.0f;
 
 void update(const float dt) {
-	angle += 0.5f * PI * dt;
+	angle += (2.0f * PI) * dt;
 
 	for (uint32_t idx = 0; idx < FRAME_WIDTH*FRAME_HEIGHT; idx += 1) {
 		frame_buffer[0][idx] = RGBA(0, 0, 0, 0);
@@ -118,9 +118,9 @@ void update(const float dt) {
 
 		uint32_t color = RGB(255, 63, 127);
 
-		if (i < 375) {
+		if (i < 373) {
 			color = RGB(63, 127, 255);
-		} else if (i > 2454) {
+		} else if (i > 2459) {
 			color = RGB(190, 190, 190);
 		}
 

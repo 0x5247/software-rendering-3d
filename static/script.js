@@ -107,6 +107,7 @@ wasmBrowserInstantiate("/mod.wasm", {
 		abort: () => console.log("Abort!"),
 		sin: Math.sin,
 		cos: Math.cos,
+		print_u16: log,
 		print_i32: log,
 		print_f32: log,
 	},
