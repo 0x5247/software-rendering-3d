@@ -110,7 +110,7 @@ void update(const float dt) {
 		frame_buffer[0][idx] = RGBA(0, 0, 0, 0);
 	}
 
-	//drawCube(0, 0, dz, angle, RGB(0, 255, 0));
+	drawCube(1.5f, -1.5f, 6.0f, angle * 2.0f, RGB(0, 255, 0));
 
 	for (uint16_t i = 0, fs_idx = 0, len = MIN(FS_LEN, (uint16_t)o); i < sizeof(fs)/sizeof(fs[0]) && fs_idx < len; i += fs[i] + 1, fs_idx += 1) {
 		vec3f a;
