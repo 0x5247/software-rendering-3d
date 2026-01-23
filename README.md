@@ -31,4 +31,4 @@ To swap the existing 3d model with a different one, run the following command an
 ```
 go run obj2c.go model.obj > src/model.h
 ```
-Note that there are some hard-coded values specific to the 3d model used here to give different parts a different color. Might wanna remove that when using different 3d models
+Note that there are some hard-coded values in `main.c` specific to the 3d model used here to give different colors to different parts. Might wanna remove/modify that when using different 3d models
