@@ -1,3 +1,5 @@
+#pragma once
+
 #include "base.h"
 
 // generated with obj2c.go

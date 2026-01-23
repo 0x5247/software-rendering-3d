@@ -25,3 +25,10 @@ Host the `static/` directory with your prefered tech to see the demo. If you hav
 ```
 go run server.go
 ```
+
+# Different 3d models
+To swap the existing 3d model with a different one, run the following command and re-build it.
+```
+go run obj2c.go model.obj > src/model.h
+```
+Note that there are some hard-coded values specific to the 3d model used here to give different parts a different color. Might wanna remove that when using different 3d models

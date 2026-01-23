@@ -2,9 +2,7 @@
 #include "math.h"
 #include "frame.h"
 #include "renderer.h"
-
-extern const vec3f vs[937];
-extern const uint16_t fs[4364];
+#include "model.h"
 
 const vec3f cube_vs[] = {
 	{ .x =  1.0f, .y =  1.0f, .z = 1.0f },
@@ -106,7 +104,7 @@ float o = 0.0f;
 void update(const float dt) {
 	angle += (0.5f * PI) * dt;
 
-	o += (FS_LEN / 10.0f) * dt;
+	o += (FS_LEN / 15.0f) * dt;
 
 	for (uint32_t idx = 0; idx < FRAME_WIDTH*FRAME_HEIGHT; idx += 1) {
 		frame_buffer[0][idx] = RGBA(0, 0, 0, 0);
@@ -122,7 +120,9 @@ void update(const float dt) {
 
 		uint32_t color = RGB(255, 63, 127);
 
-		if (fs_idx < 76) {
+		if (fs_idx == (uint16_t)o - 1) {
+			color = RGB(0,255, 0);
+		} else if (fs_idx < 76) {
 			color = RGB(63, 127, 255);
 		} else if (fs_idx > 479) {
 			color = RGB(190, 190, 190);

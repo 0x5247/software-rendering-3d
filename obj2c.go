@@ -124,6 +124,7 @@ func main() {
 		vs[i][2] -= c[2]
 	}
 
+	fmt.Println("#pragma once\n")
 	fmt.Println("#include \"base.h\"\n")
 
 	fmt.Println("// generated with obj2c.go\n")
