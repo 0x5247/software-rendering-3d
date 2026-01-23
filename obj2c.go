@@ -58,7 +58,7 @@ func main() {
 					return
 				}
 
-				f = append(f, uint32(n - 1))
+				f = append(f, uint32(n-1))
 			}
 			fs = append(fs, f)
 			fsLen += uint(len(f)) + 1
@@ -105,12 +105,12 @@ func main() {
 	maxZ := max
 
 	for _, v := range vs {
-		minX = math.Min(minX, float64(v[0]));
-		maxX = math.Max(maxX, float64(v[0]));
-		minY = math.Min(minY, float64(v[1]));
-		maxY = math.Max(maxY, float64(v[1]));
-		minZ = math.Min(minZ, float64(v[2]));
-		maxZ = math.Max(maxZ, float64(v[2]));
+		minX = math.Min(minX, float64(v[0]))
+		maxX = math.Max(maxX, float64(v[0]))
+		minY = math.Min(minY, float64(v[1]))
+		maxY = math.Max(maxY, float64(v[1]))
+		minZ = math.Min(minZ, float64(v[2]))
+		maxZ = math.Max(maxZ, float64(v[2]))
 	}
 
 	c := [3]float32{
@@ -126,8 +126,8 @@ func main() {
 	}
 
 	dz := math.Max(math.Abs(maxX), math.Abs(minX))
-	dz = math.Max(max, math.Max(math.Abs(maxY), math.Abs(minY)))
-	dz= math.Max(max, math.Max(math.Abs(maxZ), math.Abs(minZ)))
+	dz = math.Max(dz, math.Max(math.Abs(maxY), math.Abs(minY)))
+	dz = math.Max(dz, math.Max(math.Abs(maxZ), math.Abs(minZ)))
 
 	dz *= 2
 
