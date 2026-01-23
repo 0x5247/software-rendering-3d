@@ -97,7 +97,6 @@ void drawCube(float dx, float dy, float dz, float angle, uint32_t color) {
 }
 
 float angle = 0.0f;
-float dz = 5.0f;
 
 float o = 0.0f;
 
@@ -135,8 +134,8 @@ void update(const float dt) {
 			a = rotate_xz(a, angle);
 			b = rotate_xz(b, angle);
 
-			a.z += dz;
-			b.z += dz;
+			a.z += DZ;
+			b.z += DZ;
 
 			drawLinef(screenf(project(a)), screenf(project(b)), color);
 		}
@@ -150,8 +149,8 @@ void update(const float dt) {
 		a = rotate_xz(a, angle);
 		b = rotate_xz(b, angle);
 
-		a.z += dz;
-		b.z += dz;
+		a.z += DZ;
+		b.z += DZ;
 
 		drawLinef(screenf(project(a)), screenf(project(b)), color);
 		//print_u16(fs_idx, 0); // 869

@@ -125,11 +125,18 @@ func main() {
 		vs[i][2] -= c[2]
 	}
 
+	dz := math.Max(math.Abs(maxX), math.Abs(minX))
+	dz = math.Max(max, math.Max(math.Abs(maxY), math.Abs(minY)))
+	dz= math.Max(max, math.Max(math.Abs(maxZ), math.Abs(minZ)))
+
+	dz *= 2
+
 	fmt.Println("#pragma once\n")
 	fmt.Println("#include \"base.h\"\n")
 
 	fmt.Println("// generated with obj2c.go\n")
 
+	fmt.Printf("#define DZ %v\n", dz)
 	fmt.Printf("#define FS_LEN %v\n\n", len(fs))
 
 	fmt.Printf("const vec3f vs[%v] = {\n", len(vs))

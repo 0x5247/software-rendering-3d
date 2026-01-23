@@ -1,9 +1,9 @@
 #pragma once
-
 #include "base.h"
 
 // generated with obj2c.go
 
+#define DZ 5.540482044219971
 #define FS_LEN 870
 
 const vec3f vs[937] = {
