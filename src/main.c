@@ -112,15 +112,15 @@ void update(const float dt) {
 
 	drawCube(1.5f, -1.5f, 6.0f, angle * 2.0f, RGB(0, 255, 0));
 
-	for (uint16_t i = 0, fs_idx = 0, len = MIN(FS_LEN, (uint16_t)o); i < sizeof(fs)/sizeof(fs[0]) && fs_idx < len; i += fs[i] + 1, fs_idx += 1) {
+	for (uint32_t i = 0, fs_idx = 0, len = MIN(FS_LEN, (uint32_t)o); i < sizeof(fs)/sizeof(fs[0]) && fs_idx < len; i += fs[i] + 1, fs_idx += 1) {
 		vec3f a;
 		vec3f b;
 
-		uint16_t j = i + 1;
+		uint32_t j = i + 1;
 
 		uint32_t color = RGB(255, 63, 127);
 
-		if (fs_idx == (uint16_t)o - 1) {
+		if (fs_idx == (uint32_t)o - 1) {
 			color = RGB(0,255, 0);
 		} else if (fs_idx < 76) {
 			color = RGB(63, 127, 255);

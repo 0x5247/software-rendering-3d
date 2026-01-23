@@ -27,7 +27,7 @@ func main() {
 	defer objFile.Close()
 
 	vs := make([][3]float32, 0, 32)
-	fs := make([][]uint16, 0, 32)
+	fs := make([][]uint32, 0, 32)
 	fsLen := uint(1)
 
 	scanner := bufio.NewScanner(objFile)
@@ -39,7 +39,7 @@ func main() {
 		line := strings.TrimSpace(scanner.Text())
 
 		if strings.HasPrefix(line, "f ") {
-			f := make([]uint16, 0)
+			f := make([]uint32, 0)
 			for part := range strings.SplitSeq(line[2:], " ") {
 				if len(part) == 0 {
 					continue
@@ -51,13 +51,14 @@ func main() {
 					return
 				}
 
-				n, err := strconv.ParseInt(part[0:delimIdx], 10, 16)
+				n, err := strconv.ParseInt(part[0:delimIdx], 10, 32)
 				if err != nil {
 					fmt.Fprintln(os.Stderr, "error: malformed data at line number ", lineNo)
 					fmt.Fprintln(os.Stderr, err)
+					return
 				}
 
-				f = append(f, uint16(n - 1))
+				f = append(f, uint32(n - 1))
 			}
 			fs = append(fs, f)
 			fsLen += uint(len(f)) + 1
@@ -137,7 +138,7 @@ func main() {
 	}
 	fmt.Println("};\n")
 
-	fmt.Printf("const uint16_t fs[%v] = {\n", fsLen)
+	fmt.Printf("const uint32_t fs[%v] = {\n", fsLen)
 	for _, f := range fs {
 		fmt.Printf("\t%v,", len(f))
 
