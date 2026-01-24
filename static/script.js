@@ -57,34 +57,14 @@ const runWasm = (wasmModule) => {
 	});
 };
 
-// taken from https://github.com/0x5247/wasm-by-example/blob/master/demo-util/instantiateWasm.js
-const wasmBrowserInstantiate = async (wasmModuleUrl, importObject) => {
-	let response = undefined;
-
-	if (!importObject) {
-		importObject = {
-			env: {
-				abort: () => console.log("Abort!")
-			}
-		};
-	}
-
+const wasmBrowserInstantiate = (wasmModuleUrl, importObject) => {
 	if (WebAssembly.instantiateStreaming) {
-		response = await WebAssembly.instantiateStreaming(
-			fetch(wasmModuleUrl),
-			importObject
-		);
+		return WebAssembly.instantiateStreaming(fetch(wasmModuleUrl), importObject);
 	} else {
-		const fetchAndInstantiateTask = async () => {
-			const wasmArrayBuffer = await fetch(wasmModuleUrl).then(response =>
-				response.arrayBuffer()
-			);
-			return WebAssembly.instantiate(wasmArrayBuffer, importObject);
-		};
-		response = await fetchAndInstantiateTask();
+		return fetch(wasmModuleUrl)
+			.then(r => r.arrayBuffer())
+			.then(w => WebAssembly.instantiate(w, importObject));
 	}
-
-	return response;
 };
 
 const log = (n, idx) => {
@@ -106,7 +86,6 @@ const log = (n, idx) => {
 
 wasmBrowserInstantiate("/mod.wasm", {
 	env: {
-		abort: () => console.log("Abort!"),
 		sin: Math.sin,
 		cos: Math.cos,
 		print_u16: log,

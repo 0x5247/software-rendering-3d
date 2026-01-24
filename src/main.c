@@ -98,6 +98,9 @@ void drawCube(float dx, float dy, float dz, float angle, uint32_t color) {
 
 float angle = 0.0f;
 
+// using the macro (DZ) directly slows things
+// down measurably. went from 60 FPS to 59 FPS
+const float dz = DZ;
 float o = 0.0f;
 
 void update(const float dt) {
@@ -134,13 +137,11 @@ void update(const float dt) {
 			a = rotate_xz(a, angle);
 			b = rotate_xz(b, angle);
 
-			a.z += DZ;
-			b.z += DZ;
+			a.z += dz;
+			b.z += dz;
 
 			drawLinef(screenf(project(a)), screenf(project(b)), color);
 		}
-
-		if (fs[i] <= 2) continue;
 
 		// joining the first and last vertex indecies
 		a = vs[fs[i+1]];
@@ -149,11 +150,10 @@ void update(const float dt) {
 		a = rotate_xz(a, angle);
 		b = rotate_xz(b, angle);
 
-		a.z += DZ;
-		b.z += DZ;
+		a.z += dz;
+		b.z += dz;
 
 		drawLinef(screenf(project(a)), screenf(project(b)), color);
-		//print_u16(fs_idx, 0); // 869
 	}
 
 	frame_buffer[0][0] = 0xFF0000FF;
