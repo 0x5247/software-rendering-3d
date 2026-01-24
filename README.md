@@ -3,7 +3,7 @@ A demo for rendering wireframe of 3d models only with out the help of GPU.
 
 Inspired by [formula](https://github.com/tsoding/formula/).
 
-Live demo available [here](https://0x5247.github.io/bone/),
+Live demo available [here](https://0x5247.github.io/software-rendering-3d/),
 
 3d model of the [skull](https://www.cgtrader.com/free-3d-models/character/human-anatomy/skull-in-low-poly) was by [anisura](https://www.cgtrader.com/designers/anisura).
 
