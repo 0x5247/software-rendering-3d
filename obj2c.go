@@ -47,8 +47,7 @@ func main() {
 
 				delimIdx := strings.Index(part, "/")
 				if delimIdx == -1 {
-					fmt.Fprintln(os.Stderr, "error: malformed data at line number ", lineNo)
-					return
+					delimIdx = len(part)
 				}
 
 				n, err := strconv.ParseInt(part[0:delimIdx], 10, 32)
